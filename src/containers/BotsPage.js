@@ -1,6 +1,8 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from "../components/BotSpecs";
+
 class BotsPage extends React.Component {
   //start here with your code for step one
 
@@ -14,6 +16,7 @@ class BotsPage extends React.Component {
   }
 
   addToArmy = (bot) => {
+    this.clearState()
     if (!this.state.myArmy.includes(bot))
     {
     this.setState(prevState => ({...prevState,myArmy: [...prevState.myArmy,bot]}))
@@ -25,13 +28,25 @@ class BotsPage extends React.Component {
     this.setState({myArmy:newarmy})
   }
 
+  clearState = () => {
+    this.setState({activeBot:""})
+  }
+
+  setBotActive = (bot) => {
+    this.setState({activeBot:bot})
+  }
+
   render() {
     return (  
       <div>
-        <h1>__Bot Battlr__</h1>
+        <h1><center>__Bot Battlr__</center></h1>
         {/* put your components here */}
         <YourBotArmy myArmy={this.state.myArmy} removeToArmy={this.removeToArmy}/>
-        <BotCollection allBots={this.state.allBots} addToArmy={this.addToArmy} />
+        {this.state.activeBot ? 
+			  <BotSpecs bot={this.state.activeBot} clearState={this.clearState} addToArmy={this.addToArmy}/>
+			  :
+        <BotCollection allBots={this.state.allBots} addToArmy={this.setBotActive} />
+			  }
       </div>
     );
   }
