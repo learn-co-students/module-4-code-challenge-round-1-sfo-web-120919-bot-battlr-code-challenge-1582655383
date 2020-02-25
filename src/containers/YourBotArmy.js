@@ -3,8 +3,9 @@ import BotCard from "../components/BotCard";
 
 class YourBotArmy extends React.Component {
   //your bot army code here...
-
+  
   render(){
+    console.log("Your Bot Army Props", props)
     return (
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
