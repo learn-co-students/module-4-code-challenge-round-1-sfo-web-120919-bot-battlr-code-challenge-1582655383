@@ -18,12 +18,12 @@ class BotsPage extends React.Component {
   }
 
   addToBotArmy = (bot) => {
-  //  if(!this.state.botArmy.includes(bot)) {
-  //    this.setState(prevState => ({
-  //      ...prevState,
-  //      botArmy: [...prevState.botArmy, bot]
-  //    }))
-  //  }
+   if(!this.state.botArmy.includes(bot)) {
+     this.setState(prevState => ({
+       ...prevState,
+       botArmy: [...prevState.botArmy, bot]
+     }))
+   }
     console.log("INSIDE add to BOT ARMY method")
   }
 
