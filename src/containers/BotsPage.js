@@ -1,12 +1,15 @@
 import React from "react";
 import YourBotArmy from './YourBotArmy'
 import BotCollection from './BotCollection'
+import BotSpecs from '../components/BotSpecs'
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
     allBots: [],
-    yourBots: []
+    yourBots: [],
+    showDetailView: false,
+    showDetailBot: {}
   }
 
   componentDidMount() {
@@ -55,12 +58,22 @@ class BotsPage extends React.Component {
   }
 
 
+  handleDetailView = (bot, status) => {
+     this.setState(prevState => {
+       return {
+         ...prevState,
+         showDetailView: status === 'on' ?  true : false,
+         showDetailBot: status === 'on' ? bot : {}
+       }
+     })
+  }
+
 
   render() {
     return (
       <div>
         <YourBotArmy bots={this.state.yourBots} removeBotFromArmy={this.removeBotFromArmy} />
-        <BotCollection addBotToArmy={this.addBotToArmy} bots={this.state.allBots} /> 
+    {this.state.showDetailView ? <BotSpecs handleDetailView={this.handleDetailView} addBotToArmy={this.addBotToArmy} bot={this.state.showDetailBot} /> : <BotCollection handleDetailView={this.handleDetailView} bots={this.state.allBots} />} 
       </div>
     );
   }
