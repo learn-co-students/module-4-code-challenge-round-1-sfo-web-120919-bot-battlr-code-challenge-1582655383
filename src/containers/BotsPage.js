@@ -17,15 +17,15 @@ class BotsPage extends React.Component {
     .then( botsData => this.setState({bots: botsData},()=> console.log("this is bots data", botsData)))
   }
 
-  // addToBotArmy = (bot) => {
-  // //  if(!this.state.botArmy.includes(bot)) {
-  // //    this.setState(prevState => ({
-  // //      ...prevState,
-  // //      botArmy: [...prevState.botArmy, bot]
-  // //    }))
-  // //  }
-  //   console.log("INSIDE add to BOT ARMY method")
-  // }
+  addToBotArmy = (bot) => {
+   if(!this.state.botArmy.includes(bot)) {
+     this.setState(prevState => ({
+       ...prevState,
+       botArmy: [...prevState.botArmy, bot]
+     }))
+   }
+    console.log("INSIDE add to BOT ARMY method")
+  }
 
   render() {
     return (
@@ -33,7 +33,7 @@ class BotsPage extends React.Component {
         {/* put your components here */}
         
         <BotCollection BotCollection={this.state.bots} />
-        {/* <YourBotArmy addToBotArmy={this.addToBotArmy}/> */}
+        <YourBotArmy addToBotArmy={this.addToBotArmy}/>
       </div>
     );
   }
