@@ -4,16 +4,6 @@ import BotCard from "../components/BotCard";
 
 class BotCollection extends React.Component {
   //your code here
-//   state = {activeBot: null}
-
-//   addToArmy = (bot) => {
-// 	this.setState({activeBot:bot})
-//   }
-
-//   clearState = () => {
-// 	console.log("hello")
-// 	this.setState({activeBot:null})
-//   }
 
   render(){
   	return (
@@ -23,10 +13,6 @@ class BotCollection extends React.Component {
 			  {
 			  this.props.allBots.map(bot => <BotCard key={Math.random()} bot={bot} addToArmy={this.props.addToArmy}/>)
 			  }
-			  {/* {this.props.allBots.map(bot => <BotCard key={Math.random()} bot={bot} addToArmy={this.addToArmy}/>)} */}
-			  {/* {this.props.allBots.map(bot => <BotCard key={Math.random()} bot={bot} addToArmy={this.props.addToArmy}/>)} */}
-    		  {/* Collection of all bots */}
-			  {/* <BotSpecs bot={this.state.activeBot} clear={this.clearState}/> */}
     		</div>
   	  </div>
   	);
