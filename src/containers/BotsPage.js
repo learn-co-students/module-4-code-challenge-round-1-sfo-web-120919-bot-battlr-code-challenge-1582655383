@@ -2,14 +2,17 @@ import React from "react";
 import YourBotArmy from './YourBotArmy'
 import BotCollection from './BotCollection'
 import BotSpecs from '../components/BotSpecs'
+import Search from '../components/Search'
 class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
     allBots: [],
+    shownBots: [],
     yourBots: [],
     showDetailView: false,
-    showDetailBot: {}
+    showDetailBot: {},
+    query: ""
   }
 
   componentDidMount() {
@@ -68,12 +71,31 @@ class BotsPage extends React.Component {
      })
   }
 
+  handleSearchChange = (e) => {
+    console.log("handleSearchChange called")
+    const value = e.target.value
+    const q = value.toLowerCase()
+    const filteredBots = this.state.allBots.filter(bot => {
+      return bot.name.toLowerCase().includes(q)
+    } )
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        shownBots: filteredBots,
+        query: q
+      }
+    })
+  }
+
+ 
+
 
   render() {
     return (
       <div>
         <YourBotArmy bots={this.state.yourBots} removeBotFromArmy={this.removeBotFromArmy} />
-    {this.state.showDetailView ? <BotSpecs handleDetailView={this.handleDetailView} addBotToArmy={this.addBotToArmy} bot={this.state.showDetailBot} /> : <BotCollection handleDetailView={this.handleDetailView} bots={this.state.allBots} />} 
+        <Search query={this.state.query} handleSearchChange={this.handleSearchChange} />
+    {this.state.showDetailView ? <BotSpecs handleDetailView={this.handleDetailView} addBotToArmy={this.addBotToArmy} bot={this.state.showDetailBot} /> : <BotCollection handleDetailView={this.handleDetailView} bots={this.state.query === "" ? this.state.allBots :this.state.shownBots} />} 
       </div>
     );
   }
